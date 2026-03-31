@@ -1,6 +1,6 @@
 
 
-## Extracting the 20Crv3-ERA% factual data from netcdf file to csv file for NUTS3 regions
+## Extracting the 20Crv3-ERA5 factual data from netcdf file to csv file for NUTS3 regions
 
 library(ncdf4)
 library(ggplot2)
