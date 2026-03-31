@@ -49,7 +49,7 @@ for(year in 2021:2080){             ### take care of time values for 2010, origi
   output_data <- exact_extract(rast_EU, shapefile,
                                function(values, coverage_frac, weights) {
                                  weighted.mean(values, coverage_frac * weights, na.rm = TRUE)     ## coverage fraction is the fraction of cell or grid inside polygon
-                               },                                  ## wights are now , coverage fraction of cell inside polygon (default weight works without any secondary weightage)  * area if cell
+                               },                                  ## weights are now , coverage fraction of cell inside polygon (default weight works without any secondary weightage)  * area if cell
                                weights = cell_area,                 ## Calculate area of each cell explicitly depending on latitude and longitude according to coordinate system reference (self calculated by exact_extract function by itself)
                                stack_apply = TRUE)              
 
