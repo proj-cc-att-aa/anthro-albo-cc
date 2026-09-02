@@ -3,7 +3,8 @@
 This repository contains the data-processing, modelling, climate-attribution, validation, sensitivity-analysis and visualization code accompanying:
 
 **Singh, P., Semenza, J. C., Wallin, J., Fransson, P., Heidecke, J., Frieler, K., Dafka, S. & Rocklöv, J.**  
-**“Climate Change Drives the Expansion and Arboviral Outbreak Risk of *Aedes albopictus* in Europe (Under Review)”**
+**“Climate Change Drives the Expansion and Arboviral Outbreak Risk of *Aedes albopictus* in Europe”**  
+(Under review at *Nature Microbiology*).
 
 **Status:** Publication details and DOI will be added following publication.
 
@@ -351,13 +352,7 @@ climate-sensitive Ae. albopictus establishment
 +
 additional post-establishment outbreak hazard associated with factual warming
 ```
-The index is evaluated separately across posterior establishment draws so that establishment-model uncertainty is propagated into the integrated risk summaries.
-
-Final Post-establishment outbreak hazard, result aggregation throughout the manuscript and figure generation are computed using:
-
-```text
-Plotting/Plotting_final_main_supp_figures.R
-```
+The index is evaluated separately across posterior establishment draws so that establishment-model uncertainty is propagated into the integrated risk summaries. Final post-establishment outbreak hazard estimation, aggregation of results reported throughout the manuscript, and generation of the main and supplementary figures are performed using `Plotting/Plotting_final_main_supp_figures.R`.
 
 ---
 
@@ -365,7 +360,8 @@ Plotting/Plotting_final_main_supp_figures.R
 If using this repository, please cite the accompanying manuscript:
 
 **Singh, P., Semenza, J. C., Wallin, J., Fransson, P., Heidecke, J., Frieler, K., Dafka, S. & Rocklöv, J.**  
-**“Climate Change Drives the Expansion and Arboviral Outbreak Risk of *Aedes albopictus* in Europe (Under Review)”**
+**“Climate Change Drives the Expansion and Arboviral Outbreak Risk of *Aedes albopictus* in Europe”**  
+(Under review at *Nature Microbiology*).
 
 **Status:** Publication details and DOI will be added following publication.
 
