@@ -1,6 +1,6 @@
 # Climate change attribution of *Aedes albopictus* expansion and arboviral outbreak risk in Europe
 
-This repository contains the data-processing, modelling, climate-attribution, validation, sensitivity-analysis and visualization code accompanying:
+This repository contains the data-processing, modelling, climate attribution, validation, sensitivity analysis and visualization code accompanying:
 
 **Singh, P., Semenza, J. C., Wallin, J., Fransson, P., Heidecke, J., Frieler, K., Dafka, S. & Rocklöv, J.**  
 **“Climate Change Drives the Expansion and Arboviral Outbreak Risk of *Aedes albopictus* in Europe”**  
