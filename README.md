@@ -8,7 +8,7 @@ This repository contains the data-processing, modelling, climate-attribution, va
 
 **Status:** Publication details and DOI will be added following publication.
 
-The study quantifies the contribution of observed and projected climate change to the establishment and expansion of *Aedes albopictus* across Europe using a Bayesian spatio-temporal model and harmonized factual–counterfactual climate simulations. The framework further evaluates future climate-change-attributable population exposure and links projected vector establishment to the post-establishment hazard of dengue and chikungunya outbreaks.
+The study quantifies the contribution of observed and projected climate change to the establishment and expansion of *Aedes albopictus* across Europe using a Bayesian spatio-temporal model and harmonized factual–counterfactual climate simulations. The study further evaluates future climate-change-attributable population exposure and links projected vector establishment to the post-establishment hazard of dengue and chikungunya outbreaks.
 
 <p align="center">
   <img src="Results/Plots/plot_3.png" width="900">
