@@ -210,3 +210,172 @@ Users should therefore either update these source paths to include the directory
 
 ---
 
+## Script execution order
+
+### 1. Raw climate and socio-environmental extraction
+
+For complete reproduction, begin with:
+```text
+Climate_data_extraction/
+```
+
+Historical factual climate:
+```text
+ISIMIP3a_20CrV3-ERA5_factual/
+```
+
+Historical counterfactual climate:
+
+```text
+ISIMIP3a_20CRv3-ERA5_counterfactual/
+```
+
+Historical population and land use:
+
+```text
+Historical_socio-environmental/
+```
+
+Future climate, population and land use:
+
+```text
+ISIMIP3b_Future_data_extraction/
+```
+
+Users beginning from already processed files supplied in `Data/` can skip this stage.
+
+
+### 2. Construct historical and future covariates
+
+Run the scripts under:
+
+```text
+Covariates_processing_and_plotting/
+└── Climate_and_socio-economic_covariates/
+```
+The main scripts construct:
+
+```text
+historical and future climate covariates
+historical and future population covariates
+historical and future land-use covariates
+historical and future mobility covariates
+```
+
+The future climate alignment is implemented under:
+```text
+Climate_and_socio-economic_covariates/Delta_method/
+```
+Users starting with the processed datasets in `Data/` can skip the corresponding climate and socio-environmental processing steps.
+
+
+### 3. Construct the proximity covariate
+
+Run the proximity workflow under:
+
+```text
+Covariates_processing_and_plotting/Proximity_covariate/
+```
+
+### 4. Assemble and bin covariates
+
+Run:
+
+```text
+Covariates_processing_and_plotting/Covariates_binning/
+```
+
+The processed files supplied under `Data/` are intended to allow users to begin reproduction close to this stage rather than repeating the original gridded-data extraction workflow.
+
+
+### 5. Fit the factual establishment model
+
+Run:
+
+```text
+Model_Scripts/run_full_analysis_factual.R
+```
+
+This script:
+
+- loads the historical invasion and covariate data;
+- constructs the model matrices and latent spatial components;
+- fits the Bayesian spatio-temporal establishment model using INLA;
+- estimates climatic and socio-environmental effects; and
+- generates posterior factual establishment predictions.
+
+### 6. Historical counterfactual prediction
+
+Run:
+```text
+Model_Scripts/run_pred_counterfactual.R
+```
+
+### 7. Future prediction
+
+Run:
+
+```text
+Model_Scripts/run_pred_future.R
+```
+
+The future-prediction script is used for the different factual SSP and piControl climate configurations. The principal matched projections are:
+| Factual climate | Socio-environmental trajectory | Counterfactual climate |
+|---|---|---|
+| SSP1-2.6 | SSP1 | piControl |
+| SSP3-7.0 | SSP3 | piControl |
+| SSP5-8.5 | SSP5 | piControl |
+
+---
+
+## Model validation
+
+Structured out-of-sample validation is implemented using:
+```text
+Model_Scripts/Spatio_tempo_CV.R
+```
+The study evaluates predictive generalization using complementary designs. Further details are available in the accompanying manuscript.
+
+### Socio-environmental sensitivity analyses
+
+Additional scenario-based sensitivity analyses evaluate whether the projected climate-change-attributable contribution depends on the assumed future socio-environmental background. Further details are provided in the accompanying manuscript. These sensitivity analyses can be implemented directly using `Model_Scripts/run_full_analysis_factual.R`.
+
+---
+
+## Post-establishment outbreak hazard, Figures and results
+
+The establishment projections are linked to an independently estimated European time-to-event relationship between mean summer temperature and post-establishment dengue and chikungunya outbreak hazard. The integrated outbreak risk index combines:
+
+```text
+climate-sensitive Ae. albopictus establishment
++
+additional post-establishment outbreak hazard associated with factual warming
+```
+The index is evaluated separately across posterior establishment draws so that establishment-model uncertainty is propagated into the integrated risk summaries.
+
+Final Post-establishment outbreak hazard, result aggregation throughout the manuscript and figure generation are computed using:
+
+```text
+Plotting/Plotting_final_main_supp_figures.R
+```
+
+---
+
+# Citation
+If using this repository, please cite the accompanying manuscript:
+
+**Singh, P., Semenza, J. C., Wallin, J., Fransson, P., Heidecke, J., Frieler, K., Dafka, S. & Rocklöv, J.**  
+**“Climate Change Drives the Expansion and Arboviral Outbreak Risk of *Aedes albopictus* in Europe (Under Review)”**
+
+**Status:** Publication details and DOI will be added following publication.
+
+---
+
+## License
+
+The code in this repository is distributed under the terms specified in:
+```text
+LICENSE.md
+```
+
+---
