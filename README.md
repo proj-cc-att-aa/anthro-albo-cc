@@ -202,7 +202,7 @@ These must be replaced with the location of the cloned repository or associated 
 ```r
 source("functions_general.R")
 ```
-The helper files are stored in:
+The helper functions are stored in:
 
 ```text
 Functions/
