@@ -164,6 +164,7 @@ SSP3-7.0
 SSP5-8.5
 piControl
 ```
+
 ### NUTS3 spatial boundaries
 
 NUTS3 administrative regions were used as the spatial unit of analysis throughout the study. The Nomenclature of Territorial Units for Statistics (NUTS) classification and spatial boundary data can be accessed from Eurostat:
@@ -172,4 +173,40 @@ NUTS3 administrative regions were used as the spatial unit of analysis throughou
 
 The analysis harmonizes historical surveillance information to a common NUTS3 regional representation before model fitting.
 
+### Processed data
+
+To facilitate reproduction without repeating the computationally intensive raw-data extraction and preprocessing stages, the repository (`Data/`) provides the final processed climatic and socio-environmental covariates used immediately before model-data assembly and covariate binning. These files are derived from the original open datasets described above and are provided to enable users to reproduce downstream analyses without downloading and processing the complete original gridded climate, population and land-use archives.
+
 ---
+
+## Computational considerations
+
+The full analysis is computationally intensive. The main computational requirements arise from:
+
+- fitting the Bayesian spatio-temporal INLA model;
+- repeatedly refitting the model for structured cross-validation;
+- generating approximately 1,000 posterior prediction draws;
+- predicting every NUTS3 region annually through 2100;
+- recursively updating the proximity process; and
+- generating separate factual and counterfactual predictions for multiple future scenarios.
+
+Future posterior-prediction objects can therefore become large. For machines with limited memory, future scenarios should be processed sequentially and large posterior objects should be reduced to the required posterior summaries before subsequent objects are loaded. A high-memory workstation or HPC environment is recommended for complete reproduction of the full future and sensitivity-analysis workflow.
+
+### Local path configuration
+The scripts were developed within the original local analysis directory and therefore retain some local absolute paths and working-directory statements. For example, some scripts contain paths of the form:
+```r
+setwd(".../VectorNet_ 2_original")
+```
+These must be replaced with the location of the cloned repository or associated local analysis directory on the user's computer. Similarly, several model scripts source helper functions using their file names only, for example:
+```r
+source("functions_general.R")
+```
+The helper files are stored in:
+
+```text
+Functions/
+```
+Users should therefore either update these source paths to include the directory, or otherwise configure the working directory so that the corresponding helper files can be found. The same principle applies to input and output paths specified within individual scripts. The computational logic is unaffected by these machine-specific path settings, but the paths must be adapted to the local filesystem before execution.
+
+---
+
