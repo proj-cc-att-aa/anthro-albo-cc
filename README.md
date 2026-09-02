@@ -71,16 +71,16 @@ These scripts construct the seasonal climate variables, population density, land
 
 ### `Data/`
 
-Contains processed climate and socio-environmental datasets generated after the extraction and processing stages. These files are provided so that users who do not need to reproduce the complete raw-data extraction workflow can begin from the processed covariates.
+Contains processed climate and socio-environmental datasets generated after the extraction and processing stages. These files are provided so that users who do not need to reproduce the complete raw data extraction workflow can begin from the processed covariates.
 
 ### `Functions/`
 
 Contains reusable R functions used throughout the modelling and prediction workflow, including functions for:
 
-- INLA model construction;
+- Spatio-temporal (INLA model) construction;
 - SPDE implementation;
 - matrix operations;
-- spatial networks;
+- design of spatial networks;
 - proximity calculations;
 - covariate binning;
 - posterior prediction; and
@@ -99,7 +99,7 @@ Spatio_tempo_CV.R
 
 ### `Plotting/`
 
-Contains the final posterior aggregation and figure-generation workflow:
+Contains the final posterior aggregation, result extraction and plot generation workflow:
 
 ```text
 Plotting_final_main_supp_figures.R
@@ -126,7 +126,7 @@ Results/Plots/Supplementary_plots/
 
 | Data component | Original source | Access |
 |---|---|---|
-| *Ae. albopictus* surveillance | European Centre for Disease Prevention and Control(ECDC) VectorNet | Data access is restricted under the ECDC data-sharing agreement. Further details are provided in the accompanying manuscript. |
+| *Ae. albopictus* surveillance | European Centre for Disease Prevention and Control (ECDC) VectorNet | Data access is restricted under the ECDC data-sharing agreement. Further details are provided in the accompanying manuscript. |
 | Historical factual climate | ISIMIP3a 20CRv3–ERA5 `obsclim` | [ISIMIP](https://data.isimip.org/) |
 | Historical counterfactual climate | ISIMIP3a 20CRv3–ERA5 `counterclim` | [ISIMIP](https://data.isimip.org/) |
 | Future SSP climate | ISIMIP3b bias-adjusted CMIP6 | [ISIMIP](https://data.isimip.org/) |
@@ -176,7 +176,7 @@ The analysis harmonizes historical surveillance information to a common NUTS3 re
 
 ### Processed data
 
-To facilitate reproduction without repeating the computationally intensive raw-data extraction and preprocessing stages, the repository (`Data/`) provides the final processed climatic and socio-environmental covariates used immediately before model-data assembly and covariate binning. These files are derived from the original open datasets described above and are provided to enable users to reproduce downstream analyses without downloading and processing the complete original gridded climate, population and land-use archives.
+To facilitate reproduction without repeating the computationally intensive raw data extraction and preprocessing stages, the repository (`Data/`) provides the final processed climatic and socio-environmental covariates used immediately before model-data assembly and covariate binning. These files are derived from the original open datasets described above and are provided to enable users to reproduce downstream analyses without downloading and processing the complete original gridded climate, population and land-use archives.
 
 ---
 
@@ -191,10 +191,10 @@ The full analysis is computationally intensive. The main computational requireme
 - recursively updating the proximity process; and
 - generating separate factual and counterfactual predictions for multiple future scenarios.
 
-Future posterior-prediction objects can therefore become large. For machines with limited memory, future scenarios should be processed sequentially and large posterior objects should be reduced to the required posterior summaries before subsequent objects are loaded. A high-memory workstation or HPC environment is recommended for complete reproduction of the full future and sensitivity-analysis workflow.
+For machines with limited memory, future scenarios should be processed sequentially and large posterior objects should be reduced to the required posterior summaries before subsequent objects are loaded. A high-memory workstation or HPC environment is recommended for complete reproduction of the full future and sensitivity analysis workflow.
 
 ### Local path configuration
-The scripts were developed within the original local analysis directory and therefore retain some local absolute paths and working-directory statements. For example, some scripts contain paths of the form:
+The scripts were developed within the original local analysis directory and therefore retain some local absolute paths and working directory statements. For example, some scripts contain paths of the form:
 ```r
 setwd(".../VectorNet_ 2_original")
 ```
@@ -299,11 +299,11 @@ Model_Scripts/run_full_analysis_factual.R
 
 This script:
 
-- loads the historical invasion and covariate data;
-- constructs the model matrices and latent spatial components;
+- loads the historical *Aedes albopictus* surveillance and binned covariate data;
+- constructs the latent spatial components;
 - fits the Bayesian spatio-temporal establishment model using INLA;
-- estimates climatic and socio-environmental effects; and
-- generates posterior factual establishment predictions.
+- estimates random and fixed climatic and socio-environmental effects; and
+- generates posterior (1000 samples) factual establishment predictions.
 
 ### 6. Historical counterfactual prediction
 
@@ -327,6 +327,8 @@ The future-prediction script is used for the different factual SSP and piControl
 | SSP3-7.0 | SSP3 | piControl |
 | SSP5-8.5 | SSP5 | piControl |
 
+Within each factual–counterfactual pair, the same SSP-specific socio-environmental trajectory is retained.
+
 ---
 
 ## Model validation
@@ -335,7 +337,7 @@ Structured out-of-sample validation is implemented using:
 ```text
 Model_Scripts/Spatio_tempo_CV.R
 ```
-The study evaluates predictive generalization using complementary designs. Further details are available in the accompanying manuscript.
+The study evaluates predictive generalization using multiple spatial and temporal cross-validation designs. Further details are available in the accompanying manuscript.
 
 ### Socio-environmental sensitivity analyses
 
@@ -345,19 +347,19 @@ Additional scenario-based sensitivity analyses evaluate whether the projected cl
 
 ## Post-establishment outbreak hazard, Figures and results
 
-The establishment projections are linked to an independently estimated European time-to-event relationship between mean summer temperature and post-establishment dengue and chikungunya outbreak hazard. The integrated outbreak risk index combines:
+The establishment projections are linked to an independently estimated European time-to-event relationship between mean summer temperature and post-establishment dengue and chikungunya [outbreak hazard](https://doi.org/10.1016/S2542-5196(25)00059-2). The integrated outbreak risk index combines:
 
 ```text
 climate-sensitive Ae. albopictus establishment
 +
-additional post-establishment outbreak hazard associated with factual warming
+additional post-establishment outbreak hazard associated with factual warming compared to counterfactual baseline
 ```
-The index is evaluated separately across posterior establishment draws so that establishment-model uncertainty is propagated into the integrated risk summaries. Final post-establishment outbreak hazard estimation, aggregation of results reported throughout the manuscript, and generation of the main and supplementary figures are performed using `Plotting/Plotting_final_main_supp_figures.R`.
+The index is evaluated separately across posterior establishment draws, thereby propagating uncertainty from the establishment model into the integrated risk summaries. Final post-establishment outbreak-hazard estimation, aggregation of the results reported throughout the manuscript, and generation of the main and Supplementary figures are performed using Plotting/Plotting_final_main_supp_figures.R.
 
 ---
 
 # Citation
-If using this repository, please cite the accompanying manuscript:
+If using this repository or any part of code, cite the accompanying manuscript:
 
 **Singh, P., Semenza, J. C., Wallin, J., Fransson, P., Heidecke, J., Frieler, K., Dafka, S. & Rocklöv, J.**  
 **“Climate Change Drives the Expansion and Arboviral Outbreak Risk of *Aedes albopictus* in Europe”**  
