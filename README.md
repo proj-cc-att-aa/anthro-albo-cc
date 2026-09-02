@@ -50,9 +50,7 @@ anthro-albo-cc/
 ```
 ### `Climate_data_extraction/`
 
-Contains scripts for extracting the original gridded climatic, population and land-use datasets used in the study.
-
-The directory includes scripts for:
+Contains scripts for extracting the original gridded climatic, population and land-use datasets used in the study. The directory includes scripts for:
 
 - historical factual climate from ISIMIP3a 20CRv3–ERA5 `obsclim`;
 - historical counterfactual climate from ISIMIP3a `counterclim`;
@@ -61,23 +59,18 @@ The directory includes scripts for:
 
 ### `Covariates_processing_and_plotting/`
 
-Contains scripts used to transform extracted data into NUTS3-level model covariates.
-
-The main components are:
+Contains scripts used to transform extracted data into NUTS3-level model covariates.The main components are:
 
 ```text
 Climate_and_socio-economic_covariates/
 Covariates_binning/
 Proximity_covariate/
 ```
-
 These scripts construct the seasonal climate variables, population density, land-use variables, human-mobility flux, future delta-aligned climate series, proximity covariate and covariate bins required by the establishment model.
 
 ### `Data/`
 
-Contains processed climate and socio-environmental datasets generated after the extraction and processing stages.
-
-These files are provided so that users who do not need to reproduce the complete raw-data extraction workflow can begin from the processed covariates.
+Contains processed climate and socio-environmental datasets generated after the extraction and processing stages. These files are provided so that users who do not need to reproduce the complete raw-data extraction workflow can begin from the processed covariates.
 
 ### `Functions/`
 
@@ -113,9 +106,7 @@ Plotting_final_main_supp_figures.R
 
 ### `Results/`
 
-Contains figure and table outputs corresponding to the manuscript and Supplementary Information.
-
-Main-text figures are available in:
+Contains figure and table outputs corresponding to the manuscript and Supplementary Information. Main-text figures are available in:
 
 ```text
 Results/Plots/
@@ -144,3 +135,41 @@ Results/Plots/Supplementary_plots/
 | Historical and future land use | LUH2 | [LUH2](https://luh.umd.edu/data.shtml) |
 | NUTS3 boundaries | Eurostat | [Eurostat NUTS](https://ec.europa.eu/eurostat/web/nuts) |
 
+
+### Historical and Future climate
+
+Historical factual climate data were obtained from the **Inter-Sectoral Impact Model Intercomparison Project phase 3a (ISIMIP3a)** using the 20CRv3–ERA5 `obsclim` experiment. The climatic variables used were:
+
+```text
+near-surface air temperature
+total precipitation
+near-surface relative humidity
+```
+
+Future climate projections were obtained from the bias-adjusted **ISIMIP3b CMIP6 climate forcing dataset**. The analysis uses five CMIP6 climate-model forcings:
+
+```text
+GFDL-ESM4
+IPSL-CM6A-LR
+MPI-ESM1-2-HR
+MRI-ESM2-0
+UKESM1-0-LL
+```
+
+An unweighted multi-model ensemble mean was constructed for:
+
+```text
+SSP1-2.6
+SSP3-7.0
+SSP5-8.5
+piControl
+```
+### NUTS3 spatial boundaries
+
+NUTS3 administrative regions were used as the spatial unit of analysis throughout the study. The Nomenclature of Territorial Units for Statistics (NUTS) classification and spatial boundary data can be accessed from Eurostat:
+
+- [Eurostat NUTS classification and spatial data](https://ec.europa.eu/eurostat/web/nuts)
+
+The analysis harmonizes historical surveillance information to a common NUTS3 regional representation before model fitting.
+
+---
