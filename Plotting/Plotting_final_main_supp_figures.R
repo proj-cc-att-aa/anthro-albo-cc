@@ -5090,7 +5090,7 @@ compute_delta_temp <- function(clim_ssp, clim_pi, area_tbl, year_map_future, sce
     )
 }
 
-# We will give a common year column we map it to calendar year (2022 is year_idx == 1)
+# We introduce a common year column and we map it to calendar year (2022 is year_idx == 1)
 year_map_future <- tibble(
   year_idx = sort(unique(clim_pi$year_idx)),
   year     = 2021 + year_idx
