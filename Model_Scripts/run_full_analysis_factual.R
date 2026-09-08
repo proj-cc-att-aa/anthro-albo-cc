@@ -823,7 +823,7 @@ purrr::walk(names(plots_list), function(nm) {
 # Plotting the fixed effects (waterfall plot for all fixed effects)
 fixed_effects <- collected_results$fixed_effects
 
-# What we do:
+# steps in detail:
 # We drop the intercept (we only want covariate effects).
 # clean names: "_" -> " ", Title Case.
 # rename "total_flux_in" to "Mobility" for the plot.
